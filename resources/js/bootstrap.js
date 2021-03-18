@@ -1,4 +1,11 @@
 window._ = require('lodash');
+window.$ = window.jQuery = require('jquery')
+window.bootstrap = require('bootstrap')
+
+/**
+ * Admin LTE
+ */
+require('admin-lte')
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
