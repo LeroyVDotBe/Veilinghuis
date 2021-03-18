@@ -1,8 +1,11 @@
 //Bootstrap
-@import "~bootstrap/dist/css/bootstrap.min.css";
+//@import "~bootstrap/dist/css/bootstrap.min.css";
 
 //AdminLTE Core
 @import "~admin-lte/dist/css/adminlte.min.css";
+
+//Packagages
+@import "~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
 
 //Fontawesome 5.15.3
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
