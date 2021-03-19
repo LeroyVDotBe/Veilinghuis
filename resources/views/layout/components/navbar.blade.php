@@ -12,9 +12,10 @@
         </div>
 
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            @auth
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    Leroy Vermeulen<i class="fas fa-sort-down pl-1"></i>
+                    {{ Auth::user()->name }}<i class="fas fa-sort-down pl-1"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="#" class="dropdown-item">
@@ -29,6 +30,12 @@
                     </form>
                 </div>
             </li>
+            @endauth
+            @guest
+            <li class="nav-item">
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
+            </li>
+            @endguest
         </ul>
     </div>
 </nav>
