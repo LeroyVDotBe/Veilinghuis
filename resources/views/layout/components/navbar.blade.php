@@ -24,7 +24,7 @@
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Logout
+                            <i class="fas fa-lock mr-2"></i> Logout
                         </button>
                     </form>
                 </div>

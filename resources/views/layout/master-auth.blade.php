@@ -20,6 +20,7 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
+@include('layout.components.toasts')
 
 </body>
 </html>
