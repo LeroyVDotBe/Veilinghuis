@@ -23,4 +23,18 @@ class Auction extends Model
     {
         return $this->hasMany(Bid::class);
     }
+
+    public function getHighestBidAttribute()
+    {
+        if($this->bids->isNotEmpty()){
+            return $this->bids->max('bid')/100;
+        }else{
+           return $this->opening_price/100;
+        }
+    }
+
+    public function getBidIncrementAttribute()
+    {
+        return $this->increment_bid/100;
+    }
 }

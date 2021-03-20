@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuctionController;
+use App\Http\Controllers\BidController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    $auctions = \App\Models\Auction::all();
+    return view('dashboard', compact('auctions'));
 });
+
+// Auth routes are handled by Laravel/Fortify
+
+
+Route::resource('/auctions', AuctionController::class);
+Route::post('/autions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
+

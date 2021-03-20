@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auction;
 use App\Models\Bid;
+use Auth;
 use Illuminate\Http\Request;
 
 class BidController extends Controller
@@ -33,9 +35,20 @@ class BidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Auction $auction)
     {
-        //
+        // In deze controller valideer ik de "bid" waarde in de controller zelf, deze moet steeds hoger zijn als de hoogst geboden waarde
+        $validated = $request->validate([
+            'bid' => 'required|integer|min:'.$auction->highest_bid,
+        ]);
+
+        $bid = new Bid();
+        $bid->bid = round($validated['bid']*100);
+        $bid->user()->associate(Auth::user());
+        $bid->auction()->associate($auction);
+        $bid->save();
+
+        return redirect()->back();
     }
 
     /**
