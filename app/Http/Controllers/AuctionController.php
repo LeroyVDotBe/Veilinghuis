@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuctionFormRequest;
 use App\Models\Auction;
-use Illuminate\Http\Request;
 
 class AuctionController extends Controller
 {
@@ -14,7 +14,9 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        //
+        $auctions = Auction::all();
+
+        return view('dashboard', compact('auctions'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        //
+        return view('auction.create');
     }
 
     /**
@@ -33,9 +35,11 @@ class AuctionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuctionFormRequest $request)
     {
-        //
+        Auction::create($request->validated());
+
+        return redirect()->route('index');
     }
 
     /**
@@ -46,7 +50,7 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        //
+        return view('auction.show', compact('auction'));
     }
 
     /**
@@ -57,7 +61,7 @@ class AuctionController extends Controller
      */
     public function edit(Auction $auction)
     {
-        //
+        return view('auction.edit', compact('auction'));
     }
 
     /**
@@ -67,9 +71,12 @@ class AuctionController extends Controller
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auction $auction)
+    public function update(AuctionFormRequest $request, Auction $auction)
     {
-        //
+        $auction->fill($request->validated());
+        $auction->save();
+
+        return redirect()->route('auctions.show', $auction);
     }
 
     /**
@@ -80,6 +87,8 @@ class AuctionController extends Controller
      */
     public function destroy(Auction $auction)
     {
-        //
+        $auction->delete();
+
+        return redirect()->route('index');
     }
 }

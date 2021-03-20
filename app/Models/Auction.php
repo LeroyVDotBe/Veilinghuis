@@ -10,11 +10,11 @@ class Auction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'picture', 'opening_date', 'closing_date', 'opening_price', 'lot_number'
+        'name', 'description', 'opening_date', 'closing_date', 'opening_price', 'lot_number', 'increment_bid'
     ];
 
     protected $casts = [
-        //casts attribute to specific data type
+        //casts attribute naar een  specifiek data type
         'opening_date' => 'datetime:Y-m-d H:i',
         'closing_date' => 'datetime:Y-m-d H:i'
     ];

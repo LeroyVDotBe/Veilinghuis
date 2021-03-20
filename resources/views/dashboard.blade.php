@@ -39,6 +39,7 @@
                                                 <li class="small"><span class="fa-li"><i class="fas fa-euro-sign"></i></span> Highest bid: € {{ number_format($auction->highest_bid, 2, ',', '.') }}</li>
                                             </ul>
                                             <p class="text-muted text-sm"><b>Description:</b> {{$auction->description}}</p>
+                                            @if($auction->opening_date < \Carbon\Carbon::now() && $auction->closing_date > \Carbon\Carbon::now())
                                             <form action="{{ route('bids.store', $auction) }}" method="post">
                                                 @csrf
                                                 <div class="input-group input-group-sm">
@@ -53,6 +54,7 @@
                                                     </span>
                                                 </div>
                                             </form>
+                                            @endif
 
                                         </div>
                                         <div class="col-5 text-center">
@@ -62,7 +64,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-right">
-                                        <a href="#" class="btn btn-sm bg-primary">
+                                        <a href="{{ route('auctions.show', $auction) }}" class="btn btn-sm bg-primary">
                                             <i class="fas fa-search"></i> More info
                                         </a>
                                     </div>

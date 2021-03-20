@@ -15,14 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $auctions = \App\Models\Auction::all();
-    return view('dashboard', compact('auctions'));
+// Auth routes worden afgehandeld door Laravel/fortify
+
+Route::get('/', [AuctionController::class, 'index'] )->name('index');
+Route::get('/auctions/{auction}', [AuctionController::class, 'show'] )->name('auctions.show');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('/auctions', AuctionController::class)->except('index', 'show');
+    Route::post('/autions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
+    Route::view('/thankyou', 'auction.thankyou')->name('thankyou');
+
+    Route::view('/profile', 'profile.show');
+
 });
-
-// Auth routes are handled by Laravel/Fortify
-
-
-Route::resource('/auctions', AuctionController::class);
-Route::post('/autions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
 
