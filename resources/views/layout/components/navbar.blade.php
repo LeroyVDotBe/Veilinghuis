@@ -1,12 +1,12 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-        <a href="#" class="navbar-brand">
+        <a href="{{ route('index') }}" class="navbar-brand">
             <span class="brand-text font-weight-light">Veilinghuis</span>
         </a>
         <div class="collapse navbar-collapse order-3">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{ route('index') }}" class="nav-link">Home</a>
                 </li>
             </ul>
         </div>

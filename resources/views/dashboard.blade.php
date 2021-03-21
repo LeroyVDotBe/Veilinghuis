@@ -35,7 +35,7 @@
                                         <div class="col-7">
                                             <ul class="ml-4 fa-ul text-muted">
                                                 <li class="small"><span class="fa-li"><i class="fas fa-tag"></i></span> Lot N°: {{ $auction->lot_number }}</li>
-                                                <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Closing: {{ $auction->closing_date->format('M d Y') }}</li>
+                                                <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Closing: {{ $auction->closing_date->format('d M Y - H:i') }}</li>
                                                 <li class="small"><span class="fa-li"><i class="fas fa-euro-sign"></i></span> Highest bid: € {{ number_format($auction->highest_bid, 2, ',', '.') }}</li>
                                             </ul>
                                             <p class="text-muted text-sm"><b>Description:</b> {{$auction->description}}</p>
@@ -50,7 +50,7 @@
                                                     </div>
                                                     <input type="number" min="{{$auction->highest_bid + $auction->bid_increment}}" value="{{$auction->highest_bid + $auction->bid_increment}}" step="{{$auction->bid_increment}}" class="form-control" name="bid">
                                                     <span class="input-group-append">
-                                                        <button type="submit" class="btn btn-info btn-flat">Place bid</button>
+                                                        <button type="submit" class="btn btn-primary btn-flat">Place bid</button>
                                                     </span>
                                                 </div>
                                             </form>
@@ -58,7 +58,7 @@
 
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="{{ asset('img/de-loxone-miniserver-889649.png') }}" alt="" class="img-rounded img-fluid">
+                                            <img src="{{ asset($auction->picture) }}" alt="" class="img-rounded img-fluid">
                                         </div>
                                     </div>
                                 </div>

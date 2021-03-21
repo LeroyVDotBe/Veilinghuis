@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuctionFormRequest;
 use App\Models\Auction;
+use Illuminate\Http\Request;
 
 class AuctionController extends Controller
 {

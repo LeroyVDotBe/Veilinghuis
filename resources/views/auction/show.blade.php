@@ -25,7 +25,7 @@
                         <div class="col-12 col-sm-6">
                             <h3 class="d-inline-block d-sm-none">{{$auction->name}}</h3>
                             <div class="col-12">
-                                <img src="{{asset('img/de-loxone-miniserver-889649.png')}}" class="product-image" alt="Product Image">
+                                <img src="{{ asset($auction->picture) }}" class="product-image" alt="Product Image">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -34,6 +34,7 @@
                             <hr>
                             <ul class="ml-4 fa-ul text-muted">
                                 <li class="small"><span class="fa-li"><i class="fas fa-tag"></i></span> Lot N°: {{ $auction->lot_number }}</li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Opening: {{ $auction->opening_date->format('d M Y - H:i') }} ({{ $auction->opening_date->diffForHumans() }})</li>
                                 <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Closing: {{ $auction->closing_date->format('d M Y - H:i') }} ({{ $auction->closing_date->diffForHumans() }})</li>
                                 <li class="small"><span class="fa-li"><i class="fas fa-euro-sign"></i></span> Opening price: € {{ number_format($auction->opening_price/100, 2, ',', '.') }}</li>
                             </ul>
@@ -49,7 +50,7 @@
                                         </div>
                                         <input type="number" min="{{$auction->highest_bid + $auction->bid_increment}}" value="{{$auction->highest_bid + $auction->bid_increment}}" step="{{$auction->bid_increment}}" class="form-control" name="bid">
                                         <span class="input-group-append">
-                                            <button type="submit" class="btn btn-info btn-flat">Place bid</button>
+                                            <button type="submit" class="btn btn-primary btn-flat">Place bid</button>
                                         </span>
                                     </div>
                                 </div>

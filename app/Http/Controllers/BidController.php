@@ -41,7 +41,7 @@ class BidController extends Controller
     {
         // In deze controller valideer ik de "bid" waarde in de controller zelf, deze moet steeds hoger zijn als de hoogst geboden waarde
         $validated = $request->validate([
-            'bid' => 'required|integer|gt:'.$auction->highest_bid,
+            'bid' => 'required|numeric|gt:'.$auction->highest_bid,
         ]);
 
         //Serverside check of de bieding binnen het tijdslot valt.
