@@ -24,15 +24,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/auctions', AuctionController::class)->except('show');
     Route::post('/auctions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
-
     Route::view('/thankyou', 'auction.thankyou')->name('thankyou');
-
-    Route::view('/profile', 'profile.show');
+    Route::view('/profile', 'profile.show')->name('profile.show');
 
 });
 
 Route::get('/', HomeController::class )->name('index');
-
-
 Route::get('/auctions/{auction}', [AuctionController::class, 'show'] )->name('auctions.show');
 

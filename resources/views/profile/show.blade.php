@@ -34,7 +34,9 @@
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Placed Bids</b> <a class="float-right">1,322</a>
+                                    <button type="button" class="btn btn-default w-100" data-toggle="modal" data-target="#change-password">
+                                        Change password
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -43,11 +45,86 @@
                 </div>
                 <div class="col-md-9">
                     <div class="card">
-
+                        <div class="card-header">
+                            <h3 class="card-title">Placed bids</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Auction</th>
+                                        <th>Closing</th>
+                                        <th>Placed bid</th>
+                                        <th>Current bid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @forelse(Auth::user()->bids as $bid)
+                                    <tr>
+                                        <td>{{$bid->auction->name}}</td>
+                                        <td>{{$bid->auction->closing_date}}</td>
+                                        <td>{{$bid->bid/100}}</td>
+                                        <td>{{$bid->auction->highest_bid}}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>No placed bids yet</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
+
+<div class="modal fade" id="change-password" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('user-password.update') }}" method="post">
+                @csrf
+                @method('put')
+                <div class="modal-header">
+                    <h4 class="modal-title">Change password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="current_password" class="col-sm-4 col-form-label">Current password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-4 col-form-label">New password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="New password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password-confirm" class="col-sm-4 col-form-label">Confirm password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Confirm password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Change password</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

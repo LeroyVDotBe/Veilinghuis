@@ -23,8 +23,8 @@
                     {{ Auth::user()->name }}<i class="fas fa-sort-down pl-1"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <a href="{{ route('profile.show') }}" class="dropdown-item">
+                        <i class="fas fa-user mr-2"></i> My profile
                     </a>
                     <div class="dropdown-divider"></div>
                     <form action="{{ route('logout') }}" method="post">
