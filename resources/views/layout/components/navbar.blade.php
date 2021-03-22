@@ -9,11 +9,13 @@
                     <a href="{{ route('index') }}" class="nav-link">Home</a>
                 </li>
             </ul>
+            @can('viewAny', App\Models\Auction::class)
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="{{ route('auctions.index') }}" class="nav-link">Auctions</a>
                 </li>
             </ul>
+            @endcan
         </div>
 
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
