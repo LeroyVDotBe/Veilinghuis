@@ -52,7 +52,7 @@
                                 <hr>
                                 <div class="form-group">
                                     <label for="opening_price">Opening price<span class="text-danger">*</span></label>
-                                    <input type="number" id="opening_price" name="opening_price" class="form-control" {{ old('opening_price') }}>
+                                    <input type="number" id="opening_price" name="opening_price" class="form-control" value="{{ old('opening_price') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="increment_bid">Price increment<span class="text-danger">*</span></label>

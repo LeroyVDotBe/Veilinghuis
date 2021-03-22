@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuctionFormRequest extends FormRequest
+class CreateAuctionFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

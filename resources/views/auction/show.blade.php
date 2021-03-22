@@ -38,7 +38,7 @@
                                 <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Closing: {{ $auction->closing_date->format('d M Y - H:i') }} ({{ $auction->closing_date->diffForHumans() }})</li>
                                 <li class="small"><span class="fa-li"><i class="fas fa-euro-sign"></i></span> Opening price: € {{ number_format($auction->opening_price/100, 2, ',', '.') }}</li>
                             </ul>
-
+                            @if($auction->opening_date < \Carbon\Carbon::now() && $auction->closing_date > \Carbon\Carbon::now())
                             <form action="{{ route('bids.store', $auction) }}" method="post">
                                 @csrf
                                 <div class="mt-4">
@@ -55,8 +55,7 @@
                                     </div>
                                 </div>
                             </form>
-
-
+                            @endif
                             <div class="bg-secondary disabled py-2 px-3 mt-4">
                                 <h2 class="mb-0">
                                     Highest bid: € {{ number_format($auction->highest_bid, 2, ',', '.') }}

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuctionFormRequest;
+use App\Http\Requests\CreateAuctionFormRequest;
+use App\Http\Requests\UpdateAuctionFormRequest;
 use App\Models\Auction;
-use Illuminate\Http\Request;
 use Storage;
 
 class AuctionController extends Controller
@@ -16,7 +16,9 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        return view('auction.index');
+        $auctions = Auction::withCount('bids')->get();
+
+        return view('auction.index', compact('auctions'));
     }
 
     /**
@@ -35,7 +37,7 @@ class AuctionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AuctionFormRequest $request)
+    public function store(CreateAuctionFormRequest $request)
     {
         $auction = new Auction($request->validated());
         $auction->picture = $request->file('upload')->storePublicly('auctions', 'public');
@@ -75,9 +77,15 @@ class AuctionController extends Controller
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function update(AuctionFormRequest $request, Auction $auction)
+    public function update(UpdateAuctionFormRequest $request, Auction $auction)
     {
         $auction->fill($request->validated());
+
+        if ($request->hasFile('upload')) {
+            Storage::disk('public')->delete($auction->picture);
+            $auction->picture = $request->file('upload')->storePublicly('auctions', 'public');
+        }
+
         $auction->opening_price = round($request->opening_price*100);
         $auction->increment_bid = round($request->increment_bid*100);
         $auction->save();
