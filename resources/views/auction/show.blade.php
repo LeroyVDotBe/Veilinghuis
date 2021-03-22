@@ -25,7 +25,7 @@
                         <div class="col-12 col-sm-6">
                             <h3 class="d-inline-block d-sm-none">{{$auction->name}}</h3>
                             <div class="col-12">
-                                <img src="{{ asset($auction->picture) }}" class="product-image" alt="Product Image">
+                                <img src="{{ asset("storage/".$auction->picture) }}" class="product-image" alt="Product Image">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">

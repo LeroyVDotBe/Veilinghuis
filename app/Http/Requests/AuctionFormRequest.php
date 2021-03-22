@@ -26,12 +26,12 @@ class AuctionFormRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            //'upload' => 'image|size:512',
-            'opening_date' => 'required|date|before:closing_date',
-            'closing_date' => 'required|date|after:opening_date',
+            'upload' => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            'opening_date' => 'required|date|before:closing_date|after:now',
+            'closing_date' => 'required|date|after:opening_date|after:now',
             'opening_price' => 'required|integer',
             'lot_number' => 'string|max:255',
-            'increment_bid' => 'integer|min:1',
+            'increment_bid' => 'required|integer|min:1',
         ];
     }
 }

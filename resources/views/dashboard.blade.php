@@ -35,8 +35,21 @@
                                         <div class="col-7">
                                             <ul class="ml-4 fa-ul text-muted">
                                                 <li class="small"><span class="fa-li"><i class="fas fa-tag"></i></span> Lot N°: {{ $auction->lot_number }}</li>
-                                                <li class="small"><span class="fa-li"><i class="fas fa-clock"></i></span> Closing: {{ $auction->closing_date->format('d M Y - H:i') }}</li>
-                                                <li class="small"><span class="fa-li"><i class="fas fa-euro-sign"></i></span> Highest bid: € {{ number_format($auction->highest_bid, 2, ',', '.') }}</li>
+                                                <li class="small">
+                                                    <span class="fa-li"><i class="fas fa-clock"></i></span>
+                                                    @if($auction->opening_date > \Carbon\Carbon::now() && $auction->closing_date > \Carbon\Carbon::now())
+                                                        Opening: {{ $auction->opening_date->format('d M Y - H:i') }}
+                                                    @elseif($auction->opening_date < \Carbon\Carbon::now() && $auction->closing_date > \Carbon\Carbon::now())
+                                                        Closing: {{ $auction->closing_date->format('d M Y - H:i') }}
+                                                    @else
+                                                        <span class="badge badge-danger">Closed</span>
+                                                    @endif
+
+                                                </li>
+                                                <li class="small">
+                                                    <span class="fa-li"><i class="fas fa-euro-sign"></i></span>
+                                                    Highest bid: € {{ number_format($auction->highest_bid, 2, ',', '.') }}
+                                                </li>
                                             </ul>
                                             <p class="text-muted text-sm"><b>Description:</b> {{$auction->description}}</p>
                                             @if($auction->opening_date < \Carbon\Carbon::now() && $auction->closing_date > \Carbon\Carbon::now())
@@ -58,7 +71,7 @@
 
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="{{ asset($auction->picture) }}" alt="" class="img-rounded img-fluid">
+                                            <img src="{{ asset("storage/".$auction->picture) }}" alt="{{$auction->name}}" class="img-rounded img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +85,9 @@
                             </div>
                         </div>
                         @empty
-                            No auctions
+                            <div class="col-12 text-center text-muted">
+                                <h1 class="my-4">No auctions</h1>
+                            </div>
                         @endforelse
 
 

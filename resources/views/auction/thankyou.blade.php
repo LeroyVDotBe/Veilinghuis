@@ -22,6 +22,7 @@
             <div class="text-center mt-4">
                 <h2 class="headline text-success text-center">Thankyou</h2>
                 <p>You have succesfully placed your bid!</p>
+                <a href="{{ url()->previous() }}" class="btn btn-secondary"> Go back</a>
             </div>
         </div>
 

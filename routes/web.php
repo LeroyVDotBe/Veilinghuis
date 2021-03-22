@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('/auctions', AuctionController::class)->except('index', 'show');
+    Route::resource('/auctions', AuctionController::class)->except('show');
     Route::post('/auctions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
 
     Route::view('/thankyou', 'auction.thankyou')->name('thankyou');
@@ -30,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('/', [AuctionController::class, 'index'] )->name('index');
+Route::get('/', HomeController::class )->name('index');
+
+
 Route::get('/auctions/{auction}', [AuctionController::class, 'show'] )->name('auctions.show');
 

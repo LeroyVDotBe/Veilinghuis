@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuctionFormRequest;
 use App\Models\Auction;
 use Illuminate\Http\Request;
+use Storage;
 
 class AuctionController extends Controller
 {
@@ -15,9 +16,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::all();
-
-        return view('dashboard', compact('auctions'));
+        return view('auction.index');
     }
 
     /**
@@ -38,7 +37,11 @@ class AuctionController extends Controller
      */
     public function store(AuctionFormRequest $request)
     {
-        Auction::create($request->validated());
+        $auction = new Auction($request->validated());
+        $auction->picture = $request->file('upload')->storePublicly('auctions', 'public');
+        $auction->opening_price = round($request->opening_price*100);
+        $auction->increment_bid = round($request->increment_bid*100);
+        $auction->save();
 
         return redirect()->route('index');
     }
@@ -75,7 +78,13 @@ class AuctionController extends Controller
     public function update(AuctionFormRequest $request, Auction $auction)
     {
         $auction->fill($request->validated());
+        $auction->opening_price = round($request->opening_price*100);
+        $auction->increment_bid = round($request->increment_bid*100);
         $auction->save();
+
+        // TODO validator to check if there are already bids placed on the auction
+        // Option 1: Drop placed bids when this auction is edited
+        // Option 2: Restrict editing auction when auction is already started
 
         return redirect()->route('auctions.show', $auction);
     }
