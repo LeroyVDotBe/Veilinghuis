@@ -63,6 +63,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-4">
+                        <nav class="w-100">
+                            <div class="nav nav-tabs" id="product-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">All placed bids</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content p-3 w-100" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        @foreach($auction->bids->reverse() as $bid)
+                                            <tr>
+                                                <th style="width:50%">{{$bid->user->name}}</th>
+                                                <td>€ {{ number_format($bid->bid/100, 2, ',', '.') }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
