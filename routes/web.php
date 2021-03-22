@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/auctions', AuctionController::class)->except('show');
     Route::post('/auctions/{auction}/bid', [BidController::class, 'store'])->name('bids.store');
     Route::view('/thankyou', 'auction.thankyou')->name('thankyou');
-    Route::view('/profile', 'profile.show')->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
 });
 

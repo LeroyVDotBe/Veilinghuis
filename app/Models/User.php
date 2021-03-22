@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bid::class);
     }
+
+    public function auctions()
+    {
+        return $this->belongsToMany(Auction::class, 'bids');
+    }
 }

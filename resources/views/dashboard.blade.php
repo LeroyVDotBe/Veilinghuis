@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="card-body pt-0">
                                     <div class="row">
-                                        <div class="col-7">
+                                        <div class="col-md-7">
                                             <ul class="ml-4 fa-ul text-muted">
                                                 <li class="small"><span class="fa-li"><i class="fas fa-tag"></i></span> Lot N°: {{ $auction->lot_number }}</li>
                                                 <li class="small">
@@ -70,7 +70,7 @@
                                             @endif
 
                                         </div>
-                                        <div class="col-5 text-center">
+                                        <div class="col-md-5 text-center d-none d-md-block">
                                             <img src="{{ asset("storage/".$auction->picture) }}" alt="{{$auction->name}}" class="img-rounded img-fluid">
                                         </div>
                                     </div>

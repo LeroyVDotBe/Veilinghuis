@@ -54,17 +54,15 @@
                                     <tr>
                                         <th>Auction</th>
                                         <th>Closing</th>
-                                        <th>Placed bid</th>
-                                        <th>Current bid</th>
+                                        <th>Your placed bid</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @forelse(Auth::user()->bids as $bid)
+                                @forelse($auctions as $auction)
                                     <tr>
-                                        <td>{{$bid->auction->name}}</td>
-                                        <td>{{$bid->auction->closing_date}}</td>
-                                        <td>{{$bid->bid/100}}</td>
-                                        <td>{{$bid->auction->highest_bid}}</td>
+                                        <td><a href="{{ route('auctions.show', $auction) }}">{{$auction->name}}</a></td>
+                                        <td>{{$auction->closing_date->format('d M Y - H:i')}} ({{ $auction->closing_date->diffForHumans() }})</td>
+                                        <td>€ {{ number_format($auction->bids->max('bid')/100, 2, ',', '.') }}</td>
                                     </tr>
                                 @empty
                                     <tr>
