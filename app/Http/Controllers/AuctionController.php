@@ -91,6 +91,7 @@ class AuctionController extends Controller
     {
         $auction->fill($request->validated());
 
+        // Checks if the request has a new file, if yes -> current file removed, new file uploaded
         if ($request->hasFile('upload')) {
             Storage::disk('public')->delete($auction->picture);
             $auction->picture = $request->file('upload')->storePublicly('auctions', 'public');

@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 // Auth routes worden afgehandeld door Laravel/fortify
 
-
-
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('/auctions', AuctionController::class)->except('show');

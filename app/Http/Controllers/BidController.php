@@ -39,12 +39,12 @@ class BidController extends Controller
      */
     public function store(Request $request, Auction $auction)
     {
-        // In deze controller valideer ik de "bid" waarde in de controller zelf, deze moet steeds hoger zijn als de hoogst geboden waarde
+        // Check if the placed bid is higher than the current bid.
         $validated = $request->validate([
             'bid' => 'required|numeric|gt:'.$auction->highest_bid,
         ]);
 
-        //Serverside check of de bieding binnen het tijdslot valt.
+        //Serverside check if the bid is placed withing the accepted  hours, if not throw error
         if($auction->opening_date < Carbon::now() && $auction->closing_date > Carbon::now()){
 
             $bid = new Bid();

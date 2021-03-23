@@ -1,15 +1,6 @@
 require('./bootstrap');
 
-//Flatpickr voor date & datetime velden
-window.flatpickr("input[type='date']", {
-    weekNumbers: true,
-    altInput: true,
-    time_24hr: true,
-
-    altFormat: "j F Y",
-    dateFormat: "Y-m-d",
-});
-
+//Flatpickr handles datetime-local fields
 window.flatpickr("input[type='datetime-local']", {
     weekNumbers: true,
     altInput: true,
